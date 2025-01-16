@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Checkout SCM') {
             steps {
-                git credentialsId: '', url: 'https://github.com/amoghazy-organization/1-eos-micro-services-admin', branch: 'main'
+                git credentialsId: '', url: 'https://github.com/amoghazy-organization/3-eos-registry-api-build.git', branch: 'main'
             }
         }
 
@@ -117,7 +117,7 @@ pipeline {
                         withCredentials([usernamePassword(credentialsId: 'jfrog-cred', usernameVariable: 'username', passwordVariable: 'password')]) {
                           sh ''' 
                             /usr/local/bin/helm package registry-api
-                            curl -u ecomadmin:$password -T /home/jenkins/agent/workspace/micro-svc-admin-build/charts/registry-api-1.0.tgz "https://triallekevd.jfrog.io/artifactory/ecom-helm-local/registry-api-1.0.tgz"
+                            curl -u ecomadmin:$password -T /home/jenkins/agent/workspace/$JOB_NAME/charts/registry-api-1.0.tgz "https://triallekevd.jfrog.io/artifactory/ecom-helm-local/registry-api-1.0.tgz"
                             '''
 
 
